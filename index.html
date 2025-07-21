@@ -5,175 +5,77 @@
   <title>Amazing Food</title>
   <style>
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-        margin: 0;
-        min-height: 100vh;
-        background: linear-gradient(to bottom, #8B0000, #B8860B);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        font-family: Arial, sans-serif;
-        color: black;
-        position: relative;
-        padding: 20px;
+      height: 100vh;
+      background: linear-gradient(to bottom, #8B0000, #B8860B);
+      font-family: Arial, sans-serif;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    img {
-        width: 90%;
-        max-width: 300px;
-        height: auto;
-        border-radius: 20px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        transition: transform 0.3s ease;
-        opacity: 0;
-        animation: imageFadeIn 0.25s forwards;
-        cursor: pointer;
-        margin: 15px 0;
+    .image {
+      width: 80%;
+      max-width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      margin: 15px 0;
+      transition: transform 0.3s ease;
     }
 
-    img:hover {
-        transform: scale(1.05);
+    .image:hover {
+      transform: scale(1.05);
     }
 
     .text {
-        opacity: 0;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.2;
+    }
+
+    @media (min-width: 769px) {
+      .container {
+        flex-direction: row;
+      }
+
+      .image {
+        width: 300px;
+        margin: 0 20px;
+      }
+
+      .text {
         font-size: 3rem;
-        letter-spacing: -0.05em;
-        font-weight: bold;
-        animation: fadeInText 0.5s forwards;
-        animation-delay: 0.75s;
-        margin-top: 40px;
-        text-align: center;
-    }
-
-    @keyframes imageFadeIn {
-        to { opacity: 1; }
-    }
-
-    @keyframes fadeInText {
-        to { opacity: 1; }
-    }
-
-    .speech {
-        position: absolute;
-        background: white;
-        border: 3px solid black;
-        padding: 15px 30px;
-        border-radius: 50px;
-        font-size: 2.5rem;
-        font-family: Impact, sans-serif;
-        color: black;
-        opacity: 0;
-        transform: scale(0.5);
-        animation: none;
-        z-index: 10;
-        pointer-events: none;
-        white-space: nowrap;
-    }
-
-    .star {
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        background: yellow;
-        border-radius: 50%;
-        opacity: 0;
-        animation: none;
-        z-index: 9;
-    }
-
-    @keyframes bubblePop {
-        0% { opacity: 0; transform: scale(0.5); }
-        50% { opacity: 1; transform: scale(1.1); }
-        100% { opacity: 0; transform: scale(0.8); }
-    }
-
-    @keyframes starFloat {
-        0% { opacity: 1; transform: translateY(0) scale(1); }
-        100% { opacity: 0; transform: translateY(-30px) scale(1.5); }
-    }
-
-    /* Desktop layout - triggers at 1024px now */
-    @media (min-width: 1024px) {
-        .container {
-            flex-direction: row;
-            justify-content: center;
-        }
-
-        img {
-            margin: 0 20px;
-        }
-
-        .text {
-            font-size: 6rem;
-            margin-top: 80px;
-        }
+        margin-top: 30px;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <img src="Flatbread.png" alt="Flatbread" class="image" data-link="flatbread.html">
-    <img src="pasta.png" alt="Pasta" class="image" data-link="pasta.html">
+    <a href="flatbread.html"><img src="Flatbread.png" alt="Flatbread" class="image"></a>
+    <a href="pasta.html"><img src="pasta.png" alt="Pasta" class="image"></a>
   </div>
 
-  <div class="text">This is amazing food</div>
-
-  <div class="speech" id="speech">BURP!</div>
-  <div class="star" id="star1"></div>
-  <div class="star" id="star2"></div>
-  <div class="star" id="star3"></div>
-
-  <script>
-    const images = document.querySelectorAll('.image');
-    const speech = document.getElementById('speech');
-    const star1 = document.getElementById('star1');
-    const star2 = document.getElementById('star2');
-    const star3 = document.getElementById('star3');
-
-    images.forEach(img => {
-        img.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            const link = img.getAttribute('data-link');
-
-            // Get click position for mobile and desktop
-            const x = e.clientX;
-            const y = e.clientY;
-
-            // Show speech bubble at click
-            speech.style.left = (x - 80) + 'px';
-            speech.style.top = (y - 50) + 'px';
-            speech.style.animation = 'bubblePop 1s forwards';
-
-            // Animate stars
-            [star1, star2, star3].forEach((star, index) => {
-                star.style.left = (x + (index * 20 - 20)) + 'px';
-                star.style.top = (y - 70) + 'px';
-                star.style.background = ['yellow', 'orange', 'white'][index];
-                star.style.animation = 'starFloat 1s forwards';
-            });
-
-            setTimeout(() => {
-                window.location.href = link;
-            }, 1000);
-        });
-    });
-  </script>
+  <div class="text">
+    This is<br>amazing food
+  </div>
 
 </body>
 </html>
