@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amazing Food</title>
   <style>
     * {
@@ -12,149 +11,81 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
       background: linear-gradient(to bottom, #8B0000, #B8860B);
+      font-family: Arial, sans-serif;
       color: black;
-      overflow-x: hidden;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      align-items: center;
     }
 
     .container {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
-      width: 90%;
-      height: 90vh; /* Control vertical space to avoid scroll */
+      width: 100%;
+      height: 100%;
+      padding: 10px;
     }
 
-    .image-wrapper {
+    .image-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
-      opacity: 0;
-      animation: fadeInImages 0.25s forwards;
-      animation-delay: 0.1s;
-      width: 100%;
+      flex: 1;
+      gap: 10px;
     }
 
-    .image-wrapper img {
+    .image-container img {
       width: 80%;
-      max-width: 350px;
+      max-width: 300px;
       height: auto;
       border-radius: 20px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       transition: transform 0.3s ease;
     }
 
-    .image-wrapper img:hover {
+    .image-container img:hover {
       transform: scale(1.05);
     }
 
     .text {
-      opacity: 0;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: bold;
+      margin-top: 10px;
       text-align: center;
-      line-height: 1.2;
-      animation: fadeInText 0.5s forwards;
-      animation-delay: 0.5s;
-      padding-bottom: 30px; /* Add space under text */
     }
 
-    @keyframes fadeInImages {
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeInText {
-      to { opacity: 1; }
-    }
-
-    /* Desktop Styles */
-    @media(min-width: 768px) {
-      .image-wrapper {
-        flex-direction: row;
+    @media (min-width: 768px) {
+      .container {
+        flex-direction: column;
+        justify-content: center;
       }
 
-      .image-wrapper img {
-        width: 300px;
+      .image-container {
+        flex-direction: row;
+        gap: 50px;
       }
 
       .text {
-        font-size: 4rem;
-        padding-bottom: 50px;
+        font-size: 5rem;
+        margin-top: 50px;
       }
-    }
-
-    /* Speech bubble animation */
-    .speech-bubble {
-      position: absolute;
-      background: white;
-      color: black;
-      font-weight: bold;
-      border: 3px solid black;
-      border-radius: 15px;
-      padding: 10px 20px;
-      font-family: "Comic Sans MS", cursive, sans-serif;
-      font-size: 1.5rem;
-      opacity: 0;
-      animation: pop 1s forwards;
-      z-index: 1000;
-    }
-
-    @keyframes pop {
-      0% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1.2); }
-      100% { opacity: 0; transform: scale(1); }
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <div class="image-wrapper">
-      <a href="flatbread.html" class="image-link" data-target="flatbread.html">
-        <img src="Flatbread.png" alt="Flatbread">
-      </a>
-      <a href="pasta.html" class="image-link" data-target="pasta.html">
-        <img src="pasta.png" alt="Pasta">
-      </a>
+    <div class="image-container">
+      <a href="flatbread.html"><img src="Flatbread.png" alt="Flatbread"></a>
+      <a href="pasta.html"><img src="pasta.png" alt="Pasta"></a>
     </div>
-
-    <div class="text">
-      This is <br> amazing food
-    </div>
+    <div class="text">This is<br>amazing food</div>
   </div>
-
-  <script>
-    // Handle the "burp" speech bubble before navigating
-    document.querySelectorAll('.image-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetPage = this.getAttribute('data-target');
-
-        const bubble = document.createElement('div');
-        bubble.classList.add('speech-bubble');
-        bubble.innerText = "BURP!! ✨";
-
-        bubble.style.top = '50%';
-        bubble.style.left = '50%';
-        bubble.style.transform = 'translate(-50%, -50%)';
-
-        document.body.appendChild(bubble);
-
-        setTimeout(() => {
-          window.location.href = targetPage;
-        }, 1000);
-      });
-    });
-  </script>
-
 </body>
 </html>
