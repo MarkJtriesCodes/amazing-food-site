@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Amazing Food</title>
   <style>
     * {
@@ -15,7 +16,7 @@
       overflow: hidden;
       background: linear-gradient(to bottom, #8B0000, #B8860B);
       font-family: Arial, sans-serif;
-      color: black;
+      color: white;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -41,9 +42,13 @@
       gap: 10px;
     }
 
-    .image-container img {
+    .image-container a {
       width: 80%;
       max-width: 300px;
+    }
+
+    .image-container img {
+      width: 100%;
       height: auto;
       border-radius: 20px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -63,7 +68,6 @@
 
     @media (min-width: 768px) {
       .container {
-        flex-direction: column;
         justify-content: center;
       }
 
@@ -82,7 +86,7 @@
 <body>
   <div class="container">
     <div class="image-container">
-      <a href="flatbread.html"><img src="Flatbread.png" alt="Flatbread"></a>
+      <a href="flatbread.html"><img src="flatbread.png" alt="Flatbread"></a>
       <a href="pasta.html"><img src="pasta.png" alt="Pasta"></a>
     </div>
     <div class="text">This is<br>amazing food</div>
