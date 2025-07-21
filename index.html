@@ -24,11 +24,6 @@
         position: relative;
     }
 
-    .overlay {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-    }
-
     .container {
         display: flex;
         justify-content: center;
@@ -44,6 +39,7 @@
         transition: transform 0.3s ease;
         opacity: 0;
         animation: imageFadeIn 0.25s forwards;
+        cursor: pointer;
     }
 
     img:hover {
@@ -60,7 +56,7 @@
         letter-spacing: -0.05em;
         font-weight: bold;
         animation: fadeInText 0.5s forwards;
-        animation-delay: 0.75s; /* Starts after images appear */
+        animation-delay: 0.75s;
         margin-top: 80px;
     }
 
@@ -71,16 +67,98 @@
     @keyframes fadeInText {
         to { opacity: 1; }
     }
+
+    /* Speech Bubble */
+    .speech {
+        position: absolute;
+        background: white;
+        border: 5px solid black;
+        padding: 30px 50px;
+        border-radius: 50px;
+        font-size: 4rem;
+        font-family: Impact, sans-serif;
+        color: black;
+        opacity: 0;
+        transform: scale(0.5);
+        animation: none;
+        z-index: 10;
+        pointer-events: none;
+    }
+
+    .star {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: yellow;
+        border-radius: 50%;
+        opacity: 0;
+        animation: none;
+        z-index: 9;
+    }
+
+    @keyframes bubblePop {
+        0% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1.1); }
+        100% { opacity: 0; transform: scale(0.8); }
+    }
+
+    @keyframes starFloat {
+        0% { opacity: 1; transform: translateY(0) scale(1); }
+        100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
+    }
   </style>
 </head>
 <body>
-  <div class="overlay"></div>
 
   <div class="container">
-    <a href="flatbread.html"><img src="Flatbread.png" alt="Flatbread" class="image left"></a>
-    <a href="pasta.html"><img src="pasta.png" alt="Pasta" class="image right"></a>
+    <img src="Flatbread.png" alt="Flatbread" class="image" data-link="flatbread.html">
+    <img src="pasta.png" alt="Pasta" class="image" data-link="pasta.html">
   </div>
 
   <div class="text">This is amazing food</div>
+
+  <!-- Speech bubble -->
+  <div class="speech" id="speech">BURP!</div>
+
+  <!-- Stars -->
+  <div class="star" id="star1"></div>
+  <div class="star" id="star2"></div>
+  <div class="star" id="star3"></div>
+
+  <script>
+    const images = document.querySelectorAll('.image');
+    const speech = document.getElementById('speech');
+    const star1 = document.getElementById('star1');
+    const star2 = document.getElementById('star2');
+    const star3 = document.getElementById('star3');
+
+    images.forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const link = img.getAttribute('data-link');
+            const rect = img.getBoundingClientRect();
+
+            // Position speech bubble at click
+            speech.style.left = (rect.left + rect.width / 2 - 100) + 'px';
+            speech.style.top = (rect.top + rect.height / 2 - 50) + 'px';
+            speech.style.animation = 'bubblePop 1s forwards';
+
+            // Position and animate stars
+            [star1, star2, star3].forEach((star, index) => {
+                star.style.left = (rect.left + rect.width / 2 + (index * 20 - 20)) + 'px';
+                star.style.top = (rect.top + rect.height / 2 - 70) + 'px';
+                star.style.background = ['yellow', 'orange', 'white'][index];
+                star.style.animation = 'starFloat 1s forwards';
+            });
+
+            // After animation, navigate
+            setTimeout(() => {
+                window.location.href = link;
+            }, 1000);
+        });
+    });
+  </script>
+
 </body>
 </html>
