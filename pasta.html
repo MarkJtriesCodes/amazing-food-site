@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pasta</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #8B0000, #FFD700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, serif;
+      color: white;
+      position: relative;
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+    }
+    .back {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.15);
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+      z-index: 2;
+    }
+    .back:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.05);
+    }
+    .container {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      padding: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .container img {
+      width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+      margin-right: 40px;
+    }
+    .description {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      font-size: 1.5rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <a class="back" href="index.html">← Back</a>
+  <div class="container">
+    <img src="pasta.png" alt="Pasta">
+    <div class="description">
+      <strong>Thomas Straker’s Tagliarini with Girolle mushrooms</strong> is a delicate, hand-cut pasta dish showcasing peak seasonal flavor. The earthy girolles are gently sautéed, allowing their rich aroma to infuse the silky tagliarini. Finished with butter, parmesan, and a hint of herb, it’s simple, elegant, and bursting with umami.
+    </div>
+  </div>
+</body>
+</html>
